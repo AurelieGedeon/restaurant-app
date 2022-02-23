@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { Input, Button } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 export default function AddNewRestaurant() {
   const [restaurantName, setRestaurantName] = useState();
-  const [address, setAddress] = useState();
-  const [rating, setRating] = useState();
-  const [photo, setPhoto] = useState();
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [newRestaurant, setNewRestaurant] = useState();
 
-  const newRestaurant = {
-    address: address,
-    name: restaurantName,
-    numRatings: rating,
-    photoUrl: photo,
-    rating: rating,
-  };
-  https://assets3.thrillist.com/v1/image/3030083/1200x630
+  const navigation = useNavigation();
+
+  //   const newRestaurant = {
+  //     address: address,
+  //     name: restaurantName,
+  //     numRatings: rating,
+  //     photoUrl: photo,
+  //     rating: rating,
+  //   };
+  useEffect(() => {
+    if (newRestaurant.address && newRestaurant.name) {
+      setBtnDisabled(false);
+    }
+  });
   const sendNewRestaurantInfo = () => {
     fetch("https://bocacode-intranet-api.web.app/restaurants", {
       method: "POST",
@@ -24,7 +30,10 @@ export default function AddNewRestaurant() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newRestaurant),
-    });
+    })
+      .then(() => alert("New restaurant added"))
+      .then(() => navigation.navigate("Home"))
+      .catch((err) => console.error(err));
   };
 
   console.log(newRestaurant);
@@ -36,26 +45,35 @@ export default function AddNewRestaurant() {
         <Input
           placeholder="Restaurant Name"
           spellCheck
-          onChangeText={(userText) => setRestaurantName(userText)}
+          onChangeText={(userText) =>
+            setNewRestaurant({ ...newRestaurant, name: userText })
+          }
         />
         <Input
           placeholder="Photo"
           keyboardType="url"
-          onChangeText={(text) => setPhoto(text)}
+          onChangeText={(text) =>
+            setNewRestaurant({ ...newRestaurant, photo: text })
+          }
         />
         <Input
           placeholder="Address"
-          onChangeText={(text) => setAddress(text)}
+          onChangeText={(text) =>
+            setNewRestaurant({ ...newRestaurant, adress: text })
+          }
         />
         <Input
           placeholder="Rating"
           keyboardType="numeric"
           maxLength="1"
-          onChangeText={(text) => setRating(text)}
+          onChangeText={(text) =>
+            setNewRestaurant({ ...newRestaurant, rating: text })
+          }
         />
         <Button
           onPress={sendNewRestaurantInfo}
           title="Create new Restaurant"
+          disabled={btnDisabled}
           buttonStyle={{
             backgroundColor: "#8bc458",
             borderRadius: 5,

@@ -19,7 +19,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={RestaurantList} />
           <Stack.Screen name="Details" component={Details} />
-          <Stack.Screen name="New Restaurant" component={AddNewRestaurant} />
+          <Stack.Screen name="NewRestaurant" component={AddNewRestaurant} />
         </Stack.Navigator>
         <StatusBar style="auto" />
       </RestaurantContext.Provider>

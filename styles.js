@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   card: {
     width: 500,
-    backgroundColor: "#75db5e",
+    backgroundColor: "#8bc458",
     marginBottom: 16,
   },
 
@@ -16,5 +16,6 @@ export default StyleSheet.create({
     fontSize: 28,
     fontWeight: "600",
     padding: 4,
+    color: "white",
   },
 });

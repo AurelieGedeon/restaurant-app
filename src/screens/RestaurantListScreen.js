@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View, ScrollView } from "react-native";
 import RestaurantCard from "../components/RestuarantCard";
 import { Button } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RestaurantList() {
   const [restaurants, setRestaurants] = useState();
@@ -11,13 +12,19 @@ export default function RestaurantList() {
       .then((data) => setRestaurants(data))
       .catch(alert);
   }, []);
+
+  const navigation = useNavigation();
+
+  const goToNewRestaurant = () => {
+    navigation.navigate("NewRestaurant");
+  };
   return (
     <View>
       <Button
         title="Add New Restuarant"
-        onPress={() => alert("button pressed")}
+        onPress={goToNewRestaurant}
         buttonStyle={{
-          backgroundColor: "#75db5e",
+          backgroundColor: "#8bc458",
           borderRadius: 30,
         }}
         containerStyle={{

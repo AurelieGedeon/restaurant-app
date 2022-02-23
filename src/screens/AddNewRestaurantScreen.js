@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
-import { RestaurantContext } from "../../App";
-import { useNavigation } from "@react-navigation/native";
 import { Input, Button } from "react-native-elements";
 
 export default function AddNewRestaurant() {
@@ -17,9 +15,9 @@ export default function AddNewRestaurant() {
     photoUrl: photo,
     rating: rating,
   };
-
+  https://assets3.thrillist.com/v1/image/3030083/1200x630
   const sendNewRestaurantInfo = () => {
-    fetch("path", {
+    fetch("https://bocacode-intranet-api.web.app/restaurants", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -28,6 +26,8 @@ export default function AddNewRestaurant() {
       body: JSON.stringify(newRestaurant),
     });
   };
+
+  console.log(newRestaurant);
 
   return (
     <>
@@ -38,15 +38,27 @@ export default function AddNewRestaurant() {
           spellCheck
           onChangeText={(userText) => setRestaurantName(userText)}
         />
-        <Input placeholder="Photo" keyboardType="url" />
-        <Input placeholder="Address" keyboardType="" />
-        <Input placeholder="Rating" keyboardType="numeric" maxLength="1" />
+        <Input
+          placeholder="Photo"
+          keyboardType="url"
+          onChangeText={(text) => setPhoto(text)}
+        />
+        <Input
+          placeholder="Address"
+          onChangeText={(text) => setAddress(text)}
+        />
+        <Input
+          placeholder="Rating"
+          keyboardType="numeric"
+          maxLength="1"
+          onChangeText={(text) => setRating(text)}
+        />
         <Button
           onPress={sendNewRestaurantInfo}
           title="Create new Restaurant"
           buttonStyle={{
             backgroundColor: "#8bc458",
-            borderRadius: 30,
+            borderRadius: 5,
           }}
         />
       </View>

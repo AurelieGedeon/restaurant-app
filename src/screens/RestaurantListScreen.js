@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, Button } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import RestaurantCard from "../components/RestuarantCard";
+import { Button } from "react-native-elements";
 
 export default function RestaurantList() {
   const [restaurants, setRestaurants] = useState();
@@ -12,7 +13,20 @@ export default function RestaurantList() {
   }, []);
   return (
     <View>
-      <Button title="Add New Restuarant" />
+      <Button
+        title="Add New Restuarant"
+        onPress={() => alert("button pressed")}
+        buttonStyle={{
+          backgroundColor: "#75db5e",
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          alignSelf: "center",
+          width: 200,
+          marginHorizontal: 50,
+          marginVertical: 10,
+        }}
+      />
       {!restaurants ? (
         <Text>Loading</Text>
       ) : (

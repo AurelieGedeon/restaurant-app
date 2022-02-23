@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
+import RestaurantCard from "./RestuarantCard";
 
 export default function RestaurantList() {
   const [restaurants, setRestaurants] = useState();
@@ -11,13 +12,16 @@ export default function RestaurantList() {
   }, []);
   return (
     <View>
-      <Text>Restuarants</Text>
       {!restaurants ? (
         <Text>Loading</Text>
       ) : (
-        restaurants.map((restaurant) => {
-          return <Text>{restaurant.name}</Text>;
-        })
+        <ScrollView>
+          {restaurants.map((restaurant) => {
+            return (
+              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            );
+          })}
+        </ScrollView>
       )}
     </View>
   );

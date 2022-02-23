@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 export default function RestaurantList() {
   const [restaurants, setRestaurants] = useState();
@@ -9,5 +9,16 @@ export default function RestaurantList() {
       .then((data) => setRestaurants(data))
       .catch(alert);
   }, []);
-  return <Text>Restuarants</Text>;
+  return (
+    <View>
+      <Text>Restuarants</Text>
+      {!restaurants ? (
+        <Text>Loading</Text>
+      ) : (
+        restaurants.map((restaurant) => {
+          return <Text>{restaurant.name}</Text>;
+        })
+      )}
+    </View>
+  );
 }

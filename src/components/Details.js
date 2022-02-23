@@ -1,7 +1,8 @@
-import React from "react";
-import RestaurantCard from "./RestuarantCard";
-import { Text } from "react-native-safe-area-context";
+import React, { useContext } from "react";
+import { Text } from "react-native";
+import { RestaurantContext } from "../../App";
 
 export default function Details() {
+  const { selectedRestaurant } = useContext(RestaurantContext);
   return <Text>Details</Text>;
 }
